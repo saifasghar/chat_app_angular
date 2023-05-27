@@ -12,38 +12,70 @@
                             </div>
                         </div>
 
-                        <div class="col-12">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="signup-name" placeholder="Name">
-                                <label for="signup-name">Name</label>
-                            </div>
-                        </div>
+                        <form (submit)="signup()" #signupForm="ngForm">
 
-                        <div class="col-12">
-                            <div class="form-floating">
-                                <input type="email" class="form-control" id="signup-email" placeholder="Email">
-                                <label for="signup-email">Email</label>
+                            <div class="col-12 mb-5">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" name="name" id="signup-name" ngModel
+                                        placeholder="Name">
+                                    <label for="signup-name">Name</label>
+                                </div>
+                                <h6 *ngIf="!validation.name.isNotEmpty && !validation.name.isMinLength"
+                                    class="text-danger font-small mx-2">Name is required
+                                </h6>
+                                <h6 *ngIf="validation.name.isNotEmpty && !validation.name.isMinLength"
+                                    class="text-danger font-small mx-2">Name must be atleast 3 characters long
+                                </h6>
                             </div>
-                        </div>
 
-                        <div class="col-12">
-                            <div class="form-floating">
-                                <input type="password" class="form-control" id="signup-password" placeholder="Password">
-                                <label for="signup-password">Password</label>
+                            <div class="col-12 mb-5">
+                                <div class="form-floating">
+                                    <input (change)="emailAlreadyExists = false" type="email" class="form-control"
+                                        name="email" id="signup-email" ngModel placeholder="Email">
+                                    <label for="signup-email">Email</label>
+                                </div>
+                                <h6 *ngIf="!validation.email.isNotEmpty && !validation.email.isValid"
+                                    class="text-danger font-small mx-2">Email is required
+                                </h6>
+                                <h6 *ngIf="validation.email.isNotEmpty && !validation.email.isValid"
+                                    class="text-danger font-small mx-2">Email is not valid
+                                </h6>
+                                <h6 *ngIf="emailAlreadyExists" class="text-danger font-small mx-2">Email already exists
+                                </h6>
                             </div>
-                        </div>
 
-                        <div class="col-12">
-                            <button class="btn btn-block btn-lg btn-primary w-100" type="submit">Create
-                                Account</button>
-                        </div>
+                            <div class="col-12 mb-5">
+                                <div class="form-floating">
+                                    <input type="password" class="form-control" name="password" ngModel
+                                        id="signup-password" placeholder="Password">
+                                    <label for="signup-password">Password</label>
+                                </div>
+                                <h6 *ngIf="!validation.password.isNotEmpty && !validation.password.isMinLength"
+                                    class="text-danger font-small mx-2">Password
+                                    is
+                                    required
+                                </h6>
+                                <h6 *ngIf="!validation.password.isMinLength && validation.password.isNotEmpty"
+                                    class="text-danger font-small mx-2">
+                                    Password
+                                    must be atleast 8 characters long
+                                </h6>
+                            </div>
+
+
+                            <div class="col-12 mb-5">
+                                <button class="btn btn-block btn-lg btn-primary w-100" type="submit">Create
+                                    Account</button>
+                            </div>
+
+                        </form>
                     </div>
                 </div>
             </div>
 
             <!-- Text -->
             <div class="text-center mt-8">
-                <p>Already have an account? <a href="./signin.html">Sign in</a></p>
+                <p>Already have an account? <a href="auth/login">Sign in</a></p>
             </div>
 
         </div>

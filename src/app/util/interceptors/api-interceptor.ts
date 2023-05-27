@@ -49,17 +49,6 @@ export class ApiInterceptor implements HttpInterceptor {
                     }
                 }
                 return event;
-            }),
-            catchError((error: HttpErrorResponse) => {
-                let data: any = {};
-                data = {
-                    reason:
-                        error && error.error.reason
-                            ? error.error.reason
-                            : `${error.status} ${error.statusText}`,
-                    status: error.status,
-                };
-                throw new Error(error.message ? error.message : data.reason, data.reason);
             })
         );
     }

@@ -9,9 +9,4 @@ import { AuthService } from '../../Services/auth.service';
 export class LoginComponent {
 
   constructor(private authService: AuthService) { }
-  test() {
-    this.authService.test().subscribe(response => {
-      console.log(response);
-    })
-  }
 }
