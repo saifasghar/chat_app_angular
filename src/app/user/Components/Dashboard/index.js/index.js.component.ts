@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from 'src/app/user/Services/user.service';
 
 @Component({
   selector: 'app-index.js',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class IndexJsComponent {
 
+  constructor(private userServices: UserService) {
+
+  }
+
+  ngOnInit() {
+    this.userServices.test().subscribe(response => {
+      if (response.success) {
+        console.log(response);
+      }
+    });
+  }
 }

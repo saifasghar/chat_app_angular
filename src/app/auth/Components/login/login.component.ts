@@ -39,7 +39,6 @@ export class LoginComponent {
     if (this.validationPassed()) {
       this.authService.login(this.loginForm.value).subscribe(response => {
         if (response.success) {
-          // response.data.jwt_token
           this.storageObserver.setCookie('jwt_token', response.data.jwt_token, 7);
           this.router.navigate(['/user/dashboard']);
         } else {
@@ -48,7 +47,7 @@ export class LoginComponent {
           } else if (response.message == 'Email not found') {
             this.incorrectEmail = true;
           } else {
-            this.toast.error("We've sent you a verification email.");
+            this.toast.error(response.message);
           }
         }
       });
