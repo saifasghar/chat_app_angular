@@ -4,13 +4,15 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError, retry } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { StorageObserver } from '../storage.observer';
+import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
     constructor(
         private storageObserver: StorageObserver,
-        private toast: HotToastService
+        private toast: HotToastService,
+        private router: Router
     ) { }
 
     private tokenKey: string = 'jwt_token'
@@ -28,6 +30,19 @@ export class ApiInterceptor implements HttpInterceptor {
             }
         }
 
+
+        // SETTING HEADERS
+        // httpHeaders['Access-Control-Allow-Origin'] = 'http://localhost:4200';
+        if (!request.url.includes('auth/signup') && !request.url.includes('auth/login') && !request.url.includes('auth/verify-account')) {
+            if (token) {
+                httpHeaders['Authorization'] = `Bearer ${token}`;
+            } else {
+                this.toast.error('Please login first');
+                this.router.navigate(['/auth/login']);
+            }
+        }
+
+
         //SETTING BASE URL
         request = request.clone({
             url:
@@ -38,15 +53,6 @@ export class ApiInterceptor implements HttpInterceptor {
             setParams: params,
         });
 
-        // SETTING HEADERS
-        httpHeaders['Access-Control-Allow-Origin'] = 'http://localhost:4200';
-        if (!request.url.includes('auth/signup') && !request.url.includes('auth/login') && !request.url.includes('auth/verify-account')) {
-            if (token) {
-                httpHeaders['Authorization'] = `Bearer ${this.storageObserver.getCookie('jwt_token')}`;
-            } else {
-                this.toast.error('Please login first');
-            }
-        }
 
         // Pass the modified request to the next handler
         return next.handle(request).pipe(
