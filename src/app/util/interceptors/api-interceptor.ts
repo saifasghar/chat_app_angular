@@ -3,15 +3,23 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, Htt
 import { Observable, throwError } from 'rxjs';
 import { map, catchError, retry } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { StorageObserver } from '../storage.observer';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
-    constructor() { }
+    constructor(
+        private storageObserver: StorageObserver,
+        private toast: HotToastService
+    ) { }
+
+    private tokenKey: string = 'jwt_token'
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let httpHeaders: any = {},
             params: any = {},
-            paramKeys = request.params.keys();
+            paramKeys = request.params.keys(),
+            token: any = this.storageObserver.getCookie(this.tokenKey);
 
         //SETTING PARAMS
         if (paramKeys.length > 0) {
@@ -32,7 +40,13 @@ export class ApiInterceptor implements HttpInterceptor {
 
         // SETTING HEADERS
         httpHeaders['Access-Control-Allow-Origin'] = 'http://localhost:4200';
-        // httpHeaders['Authorization'] = 'Bearer <your-token>';
+        if (!request.url.includes('auth/signup') && !request.url.includes('auth/login') && !request.url.includes('auth/verify-account')) {
+            if (token) {
+                httpHeaders['Authorization'] = `Bearer ${this.storageObserver.getCookie('jwt_token')}`;
+            } else {
+                this.toast.error('Please login first');
+            }
+        }
 
         // Pass the modified request to the next handler
         return next.handle(request).pipe(
@@ -42,10 +56,12 @@ export class ApiInterceptor implements HttpInterceptor {
                     if (event.body.hasOwnProperty('success')) {
                         // check for any errors from server
                         if (!event.body.success) {
-                            throw new Error('Alert!', event.body.message);
+                            console.log('Error:', event.body.message);
+                            // throw new Error('Alert!', event.body.message);
                         }
                     } else {
-                        throw new Error('Server Error', event.body.message);
+                        console.log('Error:', event.body.message);
+                        // throw new Error('Server Error', event.body.message);
                     }
                 }
                 return event;

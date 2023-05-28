@@ -12,24 +12,44 @@
                             </div>
                         </div>
 
-                        <div class="col-12">
-                            <div class="form-floating">
-                                <input type="email" class="form-control" id="signin-email" placeholder="Email">
-                                <label for="signin-email">Email</label>
+                        <form #loginForm="ngForm">
+                            <div class="col-12 mb-5">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" (input)="incorrectEmail = false"
+                                        id="signin-email" name="email" ngModel placeholder="Email">
+                                    <label for="signin-email">Email</label>
+                                </div>
+                                <h6 *ngIf="!validation.email.isNotEmpty && !validation.email.isValid"
+                                    class="text-danger font-small mx-2">Email is required
+                                </h6>
+                                <h6 *ngIf="validation.email.isNotEmpty && !validation.email.isValid"
+                                    class="text-danger font-small mx-2">Email is not valid
+                                </h6>
+                                <h6 *ngIf="incorrectEmail" class="text-danger font-small mx-2">Email is incorrect
+                                </h6>
                             </div>
-                        </div>
 
-                        <div class="col-12">
-                            <div class="form-floating">
-                                <input type="password" class="form-control" id="signin-password" placeholder="Password">
-                                <label for="signin-password">Password</label>
+                            <div class="col-12 mb-5">
+                                <div class="form-floating">
+                                    <input type="password" class="form-control" (input)="incorrectPass = false"
+                                        name="password" ngModel id="signin-password" placeholder="Password">
+                                    <label for="signin-password">Password</label>
+                                </div>
+                                <h6 *ngIf="!validation.password.isNotEmpty && !validation.password.isMinLength"
+                                    class="text-danger font-small mx-2">Password
+                                    is
+                                    required
+                                </h6>
+                                <h6 *ngIf="incorrectPass" class="text-danger font-small mx-2">Password is incorrect
+                                </h6>
                             </div>
-                        </div>
 
-                        <div class="col-12">
-                            <button class="btn btn-block btn-lg btn-primary w-100" type="submit">Sign
-                                In</button>
-                        </div>
+                            <div class="col-12 mb-5">
+                                <button (click)="loginUser()" class="btn btn-block btn-lg btn-primary w-100"
+                                    type="submit">Sign In</button>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
             </div>
