@@ -1,5 +1,6 @@
 <!-- Chats -->
-<div class="tab-pane fade h-100 show active" id="tab-content-chats" role="tabpanel">
+<div *ngIf="curropenedStuff.sideBar == 'messages'" class="tab-pane fade h-100 show active" id="tab-content-chats"
+    role="tabpanel">
     <div class="d-flex flex-column h-100 position-relative">
         <div class="hide-scrollbar">
 
@@ -409,7 +410,8 @@
 </div>
 
 <!-- Create -->
-<div class="tab-pane fade h-100" id="tab-content-create-chat" role="tabpanel">
+<div *ngIf="curropenedStuff.sideBar == 'createChat'" class="tab-pane fade h-100 show active"
+    id="tab-content-create-chat" role="tabpanel">
     <div class="d-flex flex-column h-100">
         <div class="hide-scrollbar">
 
@@ -904,7 +906,8 @@
 </div>
 
 <!-- Friends -->
-<div class="tab-pane fade h-100" id="tab-content-friends" role="tabpanel">
+<div *ngIf="curropenedStuff.sideBar == 'friends'" class="tab-pane fade h-100 show active" id="tab-content-friends"
+    role="tabpanel">
     <div class="d-flex flex-column h-100">
         <div class="hide-scrollbar">
             <div class="container py-8">
@@ -1476,7 +1479,8 @@
 </div>
 
 <!-- Notifications - Notices -->
-<div class="tab-pane fade h-100" id="tab-content-notifications" role="tabpanel">
+<div *ngIf="curropenedStuff.sideBar == 'notifications'" class="tab-pane fade h-100 show active"
+    id="tab-content-notifications" role="tabpanel">
     <div class="d-flex flex-column h-100">
         <div class="hide-scrollbar">
             <div class="container py-8">
@@ -1959,7 +1963,8 @@
 </div>
 
 <!-- Support -->
-<div class="tab-pane fade h-100" id="tab-content-support" role="tabpanel">
+<div *ngIf="curropenedStuff.sideBar == 'support'" class="tab-pane fade h-100 show active" id="tab-content-support"
+    role="tabpanel">
     <div class="d-flex flex-column h-100">
         <div class="hide-scrollbar">
             <div class="container py-8">
@@ -2129,7 +2134,8 @@
 </div>
 
 <!-- Settings -->
-<div class="tab-pane fade h-100" id="tab-content-settings" role="tabpanel">
+<div *ngIf="curropenedStuff.sideBar == 'settings'" class="tab-pane fade h-100 show active" id="tab-content-settings"
+    role="tabpanel">
     <div class="d-flex flex-column h-100">
         <div class="hide-scrollbar">
             <div class="container py-8">

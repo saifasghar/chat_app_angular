@@ -23,7 +23,7 @@
             role="tablist">
             <!-- Invisible item to center nav vertically -->
             <li class="nav-item d-none d-xl-block invisible flex-xl-grow-1">
-                <a class="nav-link py-0 py-lg-8" href="#" title="">
+                <a class="nav-link py-0 py-lg-8" title="">
                     <div class="icon icon-xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -37,8 +37,9 @@
 
             <!-- New chat -->
             <li class="nav-item">
-                <a class="nav-link py-0 py-lg-8" id="tab-create-chat" href="#tab-content-create-chat"
-                    title="Create chat" data-bs-toggle="tab" role="tab">
+                <a class="nav-link {{curropenedStuff.sideBar == 'createChat' && 'active'}} py-0 py-lg-8 cursor-pointer"
+                    id="tab-create-chat" (click)="curropenedStuff.sideBar = 'createChat'" title="Create chat"
+                    data-bs-toggle="tab" role="tab">
                     <div class="icon icon-xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -52,8 +53,9 @@
 
             <!-- Friends -->
             <li class="nav-item">
-                <a class="nav-link py-0 py-lg-8" id="tab-friends" href="#tab-content-friends" title="Friends"
-                    data-bs-toggle="tab" role="tab">
+                <a class="nav-link {{curropenedStuff.sideBar == 'friends' && 'active'}} py-0 py-lg-8 cursor-pointer"
+                    id="tab-friends" (click)="curropenedStuff.sideBar = 'friends'" title="Friends" data-bs-toggle="tab"
+                    role="tab">
                     <div class="icon icon-xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -69,8 +71,9 @@
 
             <!-- Chats -->
             <li class="nav-item">
-                <a class="nav-link active py-0 py-lg-8" id="tab-chats" href="#tab-content-chats" title="Chats"
-                    data-bs-toggle="tab" role="tab">
+                <a class="nav-link {{curropenedStuff.sideBar == 'messages' && 'active'}} py-0 py-lg-8 cursor-pointer"
+                    id="tab-chats" (click)="curropenedStuff.sideBar = 'messages'" title="Chats" data-bs-toggle="tab"
+                    role="tab">
                     <div class="icon icon-xl icon-badged">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -86,8 +89,9 @@
 
             <!-- Notification -->
             <li class="nav-item">
-                <a class="nav-link py-0 py-lg-8" id="tab-notifications" href="#tab-content-notifications"
-                    title="Notifications" data-bs-toggle="tab" role="tab">
+                <a class="nav-link {{curropenedStuff.sideBar == 'notifications' && 'active'}} py-0 py-lg-8 cursor-pointer"
+                    id="tab-notifications" (click)="curropenedStuff.sideBar = 'notifications'" title="Notifications"
+                    data-bs-toggle="tab" role="tab">
                     <div class="icon icon-xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -101,8 +105,9 @@
 
             <!-- Support -->
             <li class="nav-item d-none d-xl-block flex-xl-grow-1">
-                <a class="nav-link py-0 py-lg-8" id="tab-support" href="#tab-content-support" title="Support"
-                    data-bs-toggle="tab" role="tab">
+                <a class="nav-link {{curropenedStuff.sideBar == 'support' && 'active'}} py-0 py-lg-8 cursor-pointer"
+                    id="tab-support" (click)="curropenedStuff.sideBar = 'support'" title="Support" data-bs-toggle="tab"
+                    role="tab">
                     <div class="icon icon-xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -145,7 +150,8 @@
 
             <!-- Settings -->
             <li class="nav-item">
-                <a class="nav-link py-0 py-lg-8" id="tab-settings" href="#tab-content-settings" title="Settings"
+                <a class="nav-link {{curropenedStuff.sideBar == 'settings' && 'active'}} py-0 py-lg-8 cursor-pointer"
+                    id="tab-settings" (click)="curropenedStuff.sideBar = 'settings'" title="Settings"
                     data-bs-toggle="tab" role="tab">
                     <div class="icon icon-xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -175,7 +181,7 @@
     <!-- Sidebar -->
     <aside class="sidebar bg-light">
         <div class="tab-content h-100" role="tablist">
-            <app-side-bar></app-side-bar>
+            <app-side-bar [curropenedStuff]="curropenedStuff"></app-side-bar>
         </div>
     </aside>
     <!-- Sidebar -->
@@ -183,14 +189,14 @@
     <!-- Chat -->
     <main class="main is-visible" data-dropzone-area="">
         <div class="container h-100">
-            <app-chat></app-chat>
+            <app-chat [curropenedStuff]="curropenedStuff"></app-chat>
         </div>
     </main>
     <!-- Chat -->
 
     <!-- Chat: Info -->
-    <div class="offcanvas offcanvas-end offcanvas-aside" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
-        id="offcanvas-more">
+    <div class="offcanvas offcanvas-end offcanvas-aside {{curropenedStuff.chatInfo && 'show'}}"
+        style="visibility: visible;" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvas-more">
         <!-- Offcanvas Header -->
         <div class="offcanvas-header py-4 py-lg-7 border-bottom">
             <a class="icon icon-lg text-muted" href="#" data-bs-dismiss="offcanvas">
@@ -1147,7 +1153,7 @@
 <!-- Layout -->
 
 <!-- Modal: Profile -->
-<div class="modal fade show" id="modal-profile" tabindex="-1" aria-labelledby="modal-profile" aria-hidden="true">
+<div class="modal fade" id="modal-profile" tabindex="-1" aria-labelledby="modal-profile" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-fullscreen-xl-down">
         <div class="modal-content">
 
@@ -1304,6 +1310,7 @@
         </div>
     </div>
 </div>
+<!-- style="display: block; padding-left: 0px;" -->
 
 <!-- Modal: Media Preview -->
 <div class="modal fade" id="modal-media-preview" tabindex="-1" aria-hidden="true">

@@ -8,9 +8,17 @@ import { UserService } from 'src/app/user/Services/user.service';
 })
 export class IndexJsComponent {
 
-  constructor(private userServices: UserService) {
+  constructor(private userServices: UserService) { }
 
-  }
+  public curropenedStuff: {
+    sideBar: string,
+    chat: string,
+    chatInfo: boolean
+  } = {
+      sideBar: 'messages',
+      chat: 'noneSelected',
+      chatInfo: false
+    };
 
   ngOnInit() {
     this.userServices.test().subscribe(response => {

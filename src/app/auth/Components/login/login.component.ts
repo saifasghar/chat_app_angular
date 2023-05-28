@@ -40,7 +40,7 @@ export class LoginComponent {
       this.authService.login(this.loginForm.value).subscribe(response => {
         if (response.success) {
           this.storageObserver.setCookie('jwt_token', response.data.jwt_token, 7);
-          this.router.navigate(['/user/dashboard']);
+          this.router.navigate(['/']);
         } else {
           if (response.message == 'Incorrect Password') {
             this.incorrectPass = true;
