@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiInterceptor } from './util/interceptors/api-interceptor';
+import { StorageObserver } from './util/storage.observer';
+import { Validator } from './util/validator/validator';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { ApiInterceptor } from './util/interceptors/api-interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: ApiInterceptor,
       multi: true
-    }
+    },
+    StorageObserver,
+    Validator
   ],
   bootstrap: [AppComponent]
 })

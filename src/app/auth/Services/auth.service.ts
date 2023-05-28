@@ -13,12 +13,16 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  authenticate(username: string, password: string): Observable<ApiResponse<any>> {
-    const credentials = { username, password };
-    return this.http.post<any>('auth/login', credentials).pipe(map(response => response.token));
+  login(credentials: { email: string, password: string }): Observable<ApiResponse<any>> {
+    // return this.http.post<any>('auth/login', credentials).pipe(map(response => response.token));
+    return this.http.post<any>('auth/login', credentials);
   }
 
   signup(body: any): Observable<ApiResponse<any>> {
     return this.http.post<any>('auth/signup', body);
+  }
+
+  verifyAccount(token: any): Observable<ApiResponse<any>> {
+    return this.http.post<any>('auth/verify-account', { token: token });
   }
 }

@@ -8,20 +8,26 @@ import { ForgotPasswordComponent } from './Components/forgot-password/forgot-pas
 import { FormsModule } from '@angular/forms';
 import { Validator } from '../util/validator/validator';
 import { HotToastModule } from '@ngneat/hot-toast';
+import { AccountVerificationComponent } from './Components/account-verification/account-verification.component';
+import { SharedModule } from '../shared/shared.module';
+import { StorageObserver } from '../util/storage.observer';
+
 
 
 @NgModule({
   declarations: [
     LoginComponent,
     SignupComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    AccountVerificationComponent
   ],
   imports: [
     CommonModule,
     AuthRoutingModule,
     FormsModule,
-    HotToastModule.forRoot()
+    HotToastModule.forRoot(),
+    SharedModule
   ],
-  providers: [Validator],
+  providers: [Validator, StorageObserver],
 })
 export class AuthModule { }

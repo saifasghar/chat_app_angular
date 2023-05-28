@@ -40,9 +40,8 @@ export class SignupComponent {
     if (this.validationPassed()) {
       this.authService.signup(this.signupForm.form.value).subscribe(response => {
         if (response.success) {
-          console.log(response);
           this.toast.success("We've sent you a verification email.");
-          // this.router.navigate(['/auth/login']);
+          this.router.navigate(['/auth/login']);
         } else {
           if (response.message == 'Email already exists') {
             this.emailAlreadyExists = true;
