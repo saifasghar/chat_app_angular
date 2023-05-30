@@ -5,6 +5,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { SideBarComponent } from './Components/Dashboard/side-bar/side-bar.component';
 import { ChatComponent } from './Components/Dashboard/chat/chat.component';
 import { IndexJsComponent } from './Components/Dashboard/index.js/index.js.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { IndexJsComponent } from './Components/Dashboard/index.js/index.js.compo
   ],
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    ModalModule.forRoot(),
   ]
 })
 export class UserModule { }

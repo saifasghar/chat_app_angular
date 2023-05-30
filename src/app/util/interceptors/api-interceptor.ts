@@ -33,7 +33,7 @@ export class ApiInterceptor implements HttpInterceptor {
 
         // SETTING HEADERS
         // httpHeaders['Access-Control-Allow-Origin'] = 'http://localhost:4200';
-        if (!request.url.includes('auth/')) {
+        if (!request.url.includes('auth/') || request.url.includes('auth/verify-token')) {
             if (token) {
                 httpHeaders['Authorization'] = `Bearer ${token}`;
             } else {
