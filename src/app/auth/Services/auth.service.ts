@@ -14,7 +14,6 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(credentials: { email: string, password: string }): Observable<ApiResponse<any>> {
-    // return this.http.post<any>('auth/login', credentials).pipe(map(response => response.token));
     return this.http.post<any>('auth/login', credentials);
   }
 

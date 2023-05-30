@@ -44,7 +44,11 @@ export class ResetPasswordComponent {
           this.toast.success('Password has been reset.');
           this.router.navigate(['/auth/login']);
         } else {
-          this.toast.error('This link has expired.');
+          if (response.message == 'Token has expired or is invalid') {
+            this.toast.error('This link has expired.');
+          } else {
+            this.toast.error(response.message);
+          }
           this.router.navigate(['auth/reset-password']);
         }
       });
