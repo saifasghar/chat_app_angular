@@ -16,7 +16,7 @@ export class IndexJsComponent {
     chatInfo: boolean
   } = {
       sideBar: 'messages',
-      chat: 'noneSelected',
+      chat: 'single',
       chatInfo: false
     };
 

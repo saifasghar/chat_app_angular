@@ -11,6 +11,7 @@ import { HotToastModule } from '@ngneat/hot-toast';
 import { AccountVerificationComponent } from './Components/account-verification/account-verification.component';
 import { SharedModule } from '../shared/shared.module';
 import { StorageObserver } from '../util/storage.observer';
+import { ResetPasswordComponent } from './Components/reset-password/reset-password.component';
 
 
 
@@ -19,7 +20,8 @@ import { StorageObserver } from '../util/storage.observer';
     LoginComponent,
     SignupComponent,
     ForgotPasswordComponent,
-    AccountVerificationComponent
+    AccountVerificationComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,
