@@ -36,7 +36,7 @@ export class ForgotPasswordComponent {
     if (this.validator.isValid(this.validation)) {
       this.authService.sendResetPasswordLink(this.email).subscribe(response => {
         if (response.success) {
-          this.toast.success('Email has been sent to the email for resetting passeord');
+          this.toast.success('Email has been sent for resetting passeord');
           console.log(response);
         } else {
           if (response.message = 'User not found') {
