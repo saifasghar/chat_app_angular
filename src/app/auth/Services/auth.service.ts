@@ -23,6 +23,14 @@ export class AuthService {
   }
 
   verifyAccount(token: any): Observable<ApiResponse<any>> {
-    return this.http.post<any>('auth/verify-account', { token: token });
+    return this.http.post<any>('auth/verify-account', { token });
+  }
+
+  sendResetPasswordLink(email: string): Observable<ApiResponse<any>> {
+    return this.http.post<any>('auth/forgot-password', { email });
+  }
+
+  resetPassword(body: { token: string | null, password: string }): Observable<ApiResponse<any>> {
+    return this.http.post<any>('auth/reset-password', body);
   }
 }

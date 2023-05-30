@@ -23,7 +23,7 @@ export class AppComponent {
     if (token) {
       this.globalServices.verifyTokenAuthenticity().subscribe(response => {
         if (response.success) {
-          this.router.navigate(['/user/dashboard']);
+          this.router.navigate(['/']);
         } else {
           this.toast.error('Please login first');
           this.router.navigate(['/auth/login']);

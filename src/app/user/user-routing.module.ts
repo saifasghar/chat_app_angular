@@ -4,7 +4,7 @@ import { SideBarComponent } from './Components/Dashboard/side-bar/side-bar.compo
 import { IndexJsComponent } from './Components/Dashboard/index.js/index.js.component';
 
 const routes: Routes = [
-  { path: 'dashboard', component: IndexJsComponent }
+  { path: '', component: IndexJsComponent }
 ];
 
 @NgModule({
