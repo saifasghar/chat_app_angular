@@ -27,6 +27,7 @@ export class IndexJsComponent {
   public openedMediaImage: any = {};
   public allFriends: any = null;
   public allNotifications: any = null;
+  public allFriendRequests: any = null;
   public mediaImages: any = [
     {
       src: 'assets/img/chat/1.jpg'
@@ -75,8 +76,10 @@ export class IndexJsComponent {
   changeCurrOpenedSideBar(type: string) {
     if (type == 'createChat') {
 
-    } else if (type == 'friends' && this.curropenedStuff.sideBar !== 'friends') {
+    } else if (type == 'friends' && !this.allFriends) {
       this.allFriends = null;
+      this.fetchSideBarData(type);
+    } else if (type == 'friendRequests' && !this.allFriendRequests) {
       this.fetchSideBarData(type);
     } else if (type == 'messages') {
 
@@ -103,6 +106,13 @@ export class IndexJsComponent {
         console.log(response);
         if (response.success) {
           this.allNotifications = response.data.notifications.reverse();
+        }
+      });
+    } else if (type == 'friendRequests') {
+      this.userServices.fetchAlFriendRequests().subscribe(response => {
+        console.log(response);
+        if (response.success) {
+          this.allFriendRequests = response.data.requests.reverse();
         }
       });
     }

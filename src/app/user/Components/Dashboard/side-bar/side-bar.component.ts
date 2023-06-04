@@ -22,6 +22,7 @@ export class SideBarComponent {
   @Output() fetchSideBarData: EventEmitter<any> = new EventEmitter();
   @Input() allFriends: any = null;
   @Input() allNotifications: any = null;
+  @Input() allFriendRequests: any = null;
   @Input() curropenedStuff: {
     sideBar: string,
     chat: string,
@@ -87,10 +88,18 @@ export class SideBarComponent {
     }
   }
 
-  confirmFriendRequest(fromEmail: string, id: string) {
-    this.userService.confirmFriendRequest({ email: fromEmail, notificationId: id }).subscribe(response => {
+  confirmFriendRequest(fromEmail: string, id: string, from: string) {
+    this.userService.confirmFriendRequest({ email: fromEmail, id }).subscribe(response => {
       if (response.success) {
-        this.fetchSideBarData.emit('notifications');
+        this.fetchSideBarData.emit(from);
+      }
+    });
+  }
+
+  rejectFriendRequest(fromEmail: string, id: string, from: string) {
+    this.userService.rejectFriendRequest({ email: fromEmail, id }).subscribe(response => {
+      if (response.success) {
+        this.fetchSideBarData.emit(from);
       }
     });
   }
