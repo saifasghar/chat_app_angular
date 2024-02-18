@@ -4,6 +4,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { UserService } from 'src/app/user/Services/user.service';
 import { StorageObserver } from 'src/app/util/storage.observer';
 import { selectedTabs } from 'src/app/util/models/selectedTabs';
+import { GlobalService } from 'src/app/Services/global.service';
 
 @Component({
   selector: 'app-index.js',
@@ -17,6 +18,7 @@ export class IndexJsComponent {
     private modalService: BsModalService,
     private storageObserver: StorageObserver,
     private router: Router,
+    private globalServices: GlobalService
   ) { }
 
   @ViewChild('profileModalTemplate') profileModalTemplate: any;
@@ -119,6 +121,7 @@ export class IndexJsComponent {
   }
 
   logoutUser() {
+    this.globalServices.disconnectUser();
     this.profileModalRef.hide();
     this.storageObserver.deleteAllCookies();
     this.router.navigate(['/auth/login']);

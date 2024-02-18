@@ -1,8 +1,11 @@
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, last } from 'rxjs';
 import { ApiResponse } from 'src/app/util/models/api-response';
 import { Injectable } from '@angular/core';
-import { io, Socket } from "socket.io-client";
+import { io, ManagerOptions, Socket, SocketOptions } from "socket.io-client";
+import { StorageObserver } from '../util/storage.observer';
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +13,17 @@ import { io, Socket } from "socket.io-client";
 export class GlobalService {
 
   private socket: Socket;
+  private tokenKey: string = 'jwt_token';
+  private token: string | null = '';
 
-  constructor(private http: HttpClient) {
-    this.socket = io("http://localhost:3000");
+  constructor(private http: HttpClient, private storageObserver: StorageObserver) {
+    this.token = this.storageObserver.getCookie(this.tokenKey);
+
+    this.socket = io(environment.baseUrl, {
+      auth: {
+        token: this.token
+      }
+    });
   }
 
   verifyTokenAuthenticity(): Observable<ApiResponse<any>> {
@@ -21,6 +32,10 @@ export class GlobalService {
 
   sendMessage(message: string): void {
     this.socket.emit("chat message", message);
+  }
+
+  disconnectUser() {
+    this.socket.emit("logout");
   }
 
   receiveMessage(): Observable<string> {

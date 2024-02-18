@@ -24,20 +24,18 @@ export class AppComponent {
       this.globalServices.verifyTokenAuthenticity().subscribe(response => {
         if (response.success) {
           this.router.navigate(['/']);
-          this.globalServices.receiveMessage().subscribe(response => {
-            console.log(response);
-          });
-          setTimeout(() => {
-            this.globalServices.sendMessage('hello')
-          }, 5000);
         } else {
           this.toast.error('Please login first');
           this.router.navigate(['/auth/login']);
         }
       });
     } else {
-      this.toast.error('Please login first');
-      this.router.navigate(['/auth/login']);
+      if (window.location.href.includes('auth')){
+
+      }else{
+        this.toast.error('Please login first');
+        this.router.navigate(['/auth/login']);
+      }
     }
 
   }
