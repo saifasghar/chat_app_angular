@@ -10,7 +10,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  test(): Observable<ApiResponse<any>> {
-    return this.http.get<any>('test');
+  getPotentialFriends(lookupTerm: string): Observable<ApiResponse<any>> {
+    return this.http.get<any>(`potential-friends/${lookupTerm}`);
   }
 }

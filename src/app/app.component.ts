@@ -3,6 +3,7 @@ import { StorageObserver } from './util/storage.observer';
 import { Router } from '@angular/router';
 import { GlobalService } from './Services/global.service';
 import { HotToastService } from '@ngneat/hot-toast';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +16,12 @@ export class AppComponent {
     private storageObserver: StorageObserver,
     private globalServices: GlobalService,
     private router: Router,
-    private toast: HotToastService
-  ) { }
+    private toast: HotToastService,
+    private socket: Socket
+  ) {
+    console.log('here');
+    this.socket.connect();
+  }
 
   ngOnInit() {
     let token = this.storageObserver.getCookie('jwt_token');
@@ -30,5 +35,9 @@ export class AppComponent {
         }
       });
     }
+  }
+
+  ngOnDestroy() {
+    this.socket.disconnect();
   }
 }

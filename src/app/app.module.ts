@@ -7,6 +7,15 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiInterceptor } from './util/interceptors/api-interceptor';
 import { StorageObserver } from './util/storage.observer';
 import { Validator } from './util/validator/validator';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = {
+  url: 'http://localhost:3000', options: {
+    query: {
+      token: new StorageObserver().getCookie('jwt_token'),
+    },
+  },
+};
 
 @NgModule({
   declarations: [
@@ -15,7 +24,8 @@ import { Validator } from './util/validator/validator';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [
     {

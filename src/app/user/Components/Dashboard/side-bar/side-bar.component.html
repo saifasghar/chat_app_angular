@@ -932,15 +932,15 @@
                                 </div>
                             </div>
 
-                            <input type="text" class="form-control form-control-lg ps-0"
+                            <input (change)="searchUsers($event)" type="text" class="form-control form-control-lg ps-0"
                                 placeholder="Search messages or users" aria-label="Search for messages or users...">
                         </div>
                     </form>
 
                     <!-- Invite button -->
                     <div class="mt-5">
-                        <a href="#" class="btn btn-lg btn-primary w-100 d-flex align-items-center"
-                            data-bs-toggle="modal" data-bs-target="#modal-invite">
+                        <a class="btn btn-lg btn-primary w-100 d-flex align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#modal-invite">
                             Find Friends
 
                             <span class="icon ms-auto">

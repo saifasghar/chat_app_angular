@@ -44,10 +44,14 @@ export class IndexJsComponent {
     //     }, 2000)
     //   }, 2000)
     // }, 2000);
-    this.userServices.test().subscribe(response => {
-      if (response.success) {
-        console.log(response);
-      }
-    });
+    // this.userServices.test().subscribe(response => {
+    //   if (response.success) {
+    //     console.log(response);
+    //   }
+    // });
+  }
+
+  logout() {
+
   }
 }
