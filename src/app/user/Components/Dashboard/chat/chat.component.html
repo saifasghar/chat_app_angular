@@ -42,7 +42,8 @@
                     <div class="col-xl-6 d-none d-xl-block">
                         <div class="row align-items-center justify-content-end gx-6">
                             <div class="col-auto">
-                                <a href="#" class="icon icon-lg text-muted" data-bs-toggle="offcanvas"
+                                <a (click)="curropenedStuff.chatInfo = !this.curropenedStuff.chatInfo"
+                                    class="icon icon-lg text-muted" data-bs-toggle="offcanvas"
                                     data-bs-target="#offcanvas-more" aria-controls="offcanvas-more">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -61,8 +62,7 @@
                                         <img class="avatar-img" src="assets/img/avatars/2.jpg" alt="#">
                                     </a>
 
-                                    <a href="#" class="avatar avatar-sm" data-bs-toggle="modal"
-                                        data-bs-target="#modal-profile">
+                                    <a class="avatar avatar-sm" data-bs-toggle="modal" data-bs-target="#modal-profile">
                                         <img class="avatar-img" src="assets/img/avatars/1.jpg" alt="#">
                                     </a>
                                 </div>
@@ -116,7 +116,7 @@
                                 <!-- Dropdown -->
                                 <div class="message-action">
                                     <div class="dropdown">
-                                        <a class="icon text-muted" href="#" role="button" data-bs-toggle="dropdown"
+                                        <a class="icon text-muted" role="button" data-bs-toggle="dropdown"
                                             aria-expanded="false">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"

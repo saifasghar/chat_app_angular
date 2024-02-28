@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-chat',
@@ -7,10 +8,16 @@ import { Component, Input } from '@angular/core';
 })
 export class ChatComponent {
 
+  constructor(private modalService: BsModalService) { }
+
   @Input() curropenedStuff: {
     sideBar: string,
     chat: string,
     chatInfo: boolean
   };
+
+  openChatInfo() {
+    this.curropenedStuff.chatInfo = !this.curropenedStuff.chatInfo;
+  }
 
 }
