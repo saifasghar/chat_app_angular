@@ -6,6 +6,7 @@ import { SideBarComponent } from './Components/Dashboard/side-bar/side-bar.compo
 import { ChatComponent } from './Components/Dashboard/chat/chat.component';
 import { IndexJsComponent } from './Components/Dashboard/index.js/index.js.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     CommonModule,
     UserRoutingModule,
     ModalModule.forRoot(),
+    FormsModule
   ]
 })
 export class UserModule { }
